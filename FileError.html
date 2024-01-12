@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="About.css">
+
+<html>
+<head>
+
+  <!DOCTYPE html>
+  <html lang="ru">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>ИЭТР</title>
+      <style>
+       .button-wrapper{
+	display: flex;	
+	justify-content: center;	
+}
+          body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+              font-size: 18px;
+              background-color: #ffffff; /* Белый цвет фона */
+              color: #333333; /* Темный цвет текста */
+          }
+  
+          header {
+              background-color: #ffffff;
+              color: #42aaff;
+              padding: 0.5em 1em; /* Добавлен отступ вокруг содержимого шапки */
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+          }
+  
+          .logo {
+              height: 100px; /* Высота логотипа */
+          }
+  
+          nav {
+              background-color: #42aaff;
+              color: #ffffff;
+              text-align: center;
+              padding: 1em 0;
+          }
+  
+          nav a {
+              color: #ffffff;
+              text-decoration: none;
+              margin: 0 15px;
+              padding: 5px 10px;
+              border-radius: 5px;
+              transition: background-color 0.3s;
+          }
+  
+          nav a:hover {
+              background-color: #000000;
+          }
+  
+          section {
+              padding: 20px;
+              background-color: #f0f0f0; /* Светло-серый цвет фона для секций */
+              margin: 10px;
+              border-radius: 8px; /* Скругление углов секций */
+          }
+  
+          footer {
+              background-color: #ffffff;
+              color: #000000;
+              text-align: center;
+              padding: 1em 0;
+              border-top: 1px solid #42aaff;
+          }
+  
+          footer p {
+              margin: 0;
+          }
+      </style>
+
+  </head>
+
+<body>
+  <nav>
+    <a href="index.html">Главная</a>
+
+    <a href="Contacts.html">Контакты</a>
+</nav>
+<div align="center">
+    <img src="FileErr.jpg"/>
+<p class="par" >Устранение ошибок при загрузки файла с данными в программу</p>
+<!--<p class="par2" >Счетчик</p>-->
+<button id="start" onclick="start()" type="text" >Начать диагностику</button>
+
+    <button id="yes" onclick="stepYes()" type="text" align="center">Да</button>
+    <button id="no" onclick="stepNo()" type="text" align="center">Нет</button>
+    <button id="next" onclick="stepNext()" type="text" align="center">Далее</button>
+    <button id="support" onclick="window.location.href = 'Contacts.html';" type="text" align="center" > Тех.поддержка</button>
+    <button id="home" onclick="window.location.href = 'index.html';"   type="text" align="center" > На главную</button>   
+</div>
+<script>
+    var sch=0;
+   
+document.getElementById("yes").hidden = true;
+    document.getElementById("no").hidden = true;
+    document.getElementById("next").hidden = true;
+    document.getElementById("support").hidden = true;
+    document.getElementById("home").hidden = true;
+
+function stepNext(){
+    sch= sch + 0.01;
+    if (sch === 2.01){sch=7;}
+    if (sch === 2.11){sch=5;}
+    stepCheck();
+    document.getElementById("next").hidden = true;
+    document.getElementById("yes").hidden = false;
+    document.getElementById("no").hidden = false;
+    
+   
+} 
+function stepYes(){
+    sch+=1.00;
+   
+     document.getElementById("next").hidden = false;
+  document.getElementById("no").hidden = true;
+    document.getElementById("yes").hidden = true;
+    stepCheck();
+   
+} 
+function stepNo(){
+    sch+=1.10;
+  document.getElementById("next").hidden = false;
+  document.getElementById("no").hidden = true;
+    document.getElementById("yes").hidden = true;
+    stepCheck();
+   
+    
+    
+} 
+function start(){
+    sch=1.00;
+    
+    stepCheck();
+     document.getElementById("start").hidden = true;
+     document.getElementById("yes").hidden = false;
+    document.getElementById("no").hidden = false;
+    
+    
+} 
+function stepCheck(){
+    /*var par2 = document.querySelector('.par2');
+  par2.innerHTML = sch; */
+    if (sch === 1.00 || sch === 8.10) {
+        sch=1.00;
+        document.getElementById("next").hidden = true;
+    document.getElementById("yes").hidden = false;
+    document.getElementById("no").hidden = false;
+  var par = document.querySelector('.par');
+  par.innerHTML = 'Шаг 1. Присутствуют ли пустые данные в файле?';
+  }
+  if (sch === 2.00) {
+  var par = document.querySelector('.par');
+  par.innerHTML = 'Шаг 2. Заполните пустые данные';
+
+ }
+  if (sch === 2.10) {
+  var par = document.querySelector('.par');
+  par.innerHTML = 'Шаг 2. Проверьте формат данных';
+  }
+  
+ if (sch === 5||sch === 6.109999999999999 ) {
+    sch=5;
+  var par = document.querySelector('.par');
+  par.innerHTML = 'Шаг 1. Формат всех данных - числовой?';
+ }
+ if (sch === 8) {
+ sch = 0;
+  var par = document.querySelector('.par');
+  par.innerHTML = 'Диагностика успешно завершена';
+  document.getElementById("next").hidden = true;
+  document.getElementById("no").hidden = true;
+    document.getElementById("yes").hidden = true;
+    document.getElementById("home").hidden = false;
+ }
+ if (sch === 7 ||sch === 6) {
+    sch=7;
+  var par = document.querySelector('.par');
+  document.getElementById("next").hidden = true;
+    document.getElementById("yes").hidden = false;
+    document.getElementById("no").hidden = false;
+  par.innerHTML = 'Шаг 2.Файл обработан?';
+
+  
+} 
+if ( sch === 6.1) {
+  var par = document.querySelector('.par');
+  par.innerHTML = 'Шаг 1.Переведите все данные в числовой формат';
+}                                   
+}
+</script>
+</body>
